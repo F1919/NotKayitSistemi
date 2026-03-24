@@ -1,0 +1,44 @@
+﻿@model NotKayitSistemi.Models.Entities.OgrenciIletisim
+
+<h2>İletişim Güncelle</h2>
+
+<form asp-action="Edit" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="OgrenciTmlId"></label>
+        <select asp-for="OgrenciTmlId"
+                class="form-control"
+                asp-items="ViewBag.Ogrenciler">
+        </select>
+        <span asp-validation-for="OgrenciTmlId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-2">
+        <label asp-for="Telefon"></label>
+        <input asp-for="Telefon" class="form-control" />
+        <span asp-validation-for="Telefon" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-warning">Güncelle</button>
+        <a asp-action="Index" class="btn btn-secondary">Geri</a>
+    </div>
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

@@ -1,0 +1,348 @@
+﻿@model NotKayitSistemi.Models.Entities.OgrenciTml
+
+@{
+    ViewData["Title"] = "Öğrenci Profil";
+    var returnUrl = Url.Action("Details", "Ogrenci", new { id = Model.Id });
+}
+
+<style>
+    .profile-header {
+        background: linear-gradient(135deg,#1e3c72,#2a5298);
+        border-radius: 20px;
+        padding: 25px;
+        color: white;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    }
+
+    .avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: white;
+        color: #1e3c72;
+        font-size: 28px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .info-card {
+        background: white;
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,.05);
+        margin-bottom: 25px;
+    }
+
+    .accordion-item {
+        border: none;
+        border-radius: 14px;
+        margin-bottom: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,.04);
+    }
+
+    .accordion-button {
+        font-weight: 600;
+        background-color: #f8f9fa;
+    }
+
+    .btn-modern {
+        border-radius: 25px;
+        padding: 4px 14px;
+        font-size: .8rem;
+    }
+</style>
+
+<div class="container-fluid">
+
+    <!-- HEADER -->
+    <div class="profile-header d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+            <div class="avatar">
+                @Model.Ad.Substring(0, 1)
+            </div>
+            <div>
+                <h4 class="mb-1">@Model.Ad @Model.Soyad</h4>
+                <small>ID: @Model.Id</small>
+            </div>
+        </div>
+
+        <div>
+            <a class="btn btn-light btn-modern me-2"
+               asp-action="Edit" asp-route-id="@Model.Id">
+                Düzenle
+            </a>
+
+            <a class="btn btn-outline-light btn-modern"
+               asp-action="Index">
+                Geri
+            </a>
+        </div>
+    </div>
+
+    <!-- TEMEL -->
+    <div class="info-card">
+        <h5 class="mb-4">Temel Bilgiler</h5>
+
+        <div class="row mb-2">
+            <div class="col-md-3 text-muted">Ad</div>
+            <div class="col-md-9 fw-bold">@Model.Ad</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-md-3 text-muted">Soyad</div>
+            <div class="col-md-9 fw-bold">@Model.Soyad</div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-md-3 text-muted">Doğum Tarihi</div>
+            <div class="col-md-9 fw-bold">@Model.DogumTarihi.ToString("dd.MM.yyyy")</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 text-muted">Cinsiyet</div>
+            <div class="col-md-9 fw-bold">@Model.Cinsiyet</div>
+        </div>
+    </div>
+
+    <div class="accordion" id="ogrAccordion">
+
+        <!-- ADRES -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#cAdres">
+                    📍 Adres
+                </button>
+            </h2>
+
+            <div id="cAdres" class="accordion-collapse collapse">
+                <div class="accordion-body">
+
+                    <a class="btn btn-success btn-modern mb-3"
+                       asp-controller="OgrenciAdres"
+                       asp-action="Create"
+                       asp-route-ogrenciId="@Model.Id"
+                       asp-route-returnUrl="@returnUrl">
+                        + Adres Ekle
+                    </a>
+
+                    @if (Model.OgrenciAdresler?.Any() == true)
+                    {
+                        @foreach (var a in Model.OgrenciAdresler)
+                        {
+                            <div class="card mb-2 shadow-sm border-0">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+
+                                    <div>@a.Adres</div>
+
+                                    <div class="d-flex gap-2">
+                                        <a class="btn btn-warning btn-modern"
+                                           asp-controller="OgrenciAdres"
+                                           asp-action="Edit"
+                                           asp-route-id="@a.Id"
+                                           asp-route-returnUrl="@returnUrl">
+                                            Düzenle
+                                        </a>
+
+                                        <a class="btn btn-danger btn-modern"
+                                           asp-controller="OgrenciAdres"
+                                           asp-action="Delete"
+                                           asp-route-id="@a.Id"
+                                           asp-route-returnUrl="@returnUrl">
+                                            Sil
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-muted">Adres kaydı yok.</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- İLETİŞİM -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#cIletisim">
+                    📞 İletişim
+                </button>
+            </h2>
+
+            <div id="cIletisim" class="accordion-collapse collapse">
+                <div class="accordion-body">
+
+                    <a class="btn btn-success btn-modern mb-3"
+                       asp-controller="OgrenciIletisim"
+                       asp-action="Create"
+                       asp-route-ogrenciId="@Model.Id"
+                       asp-route-returnUrl="@returnUrl">
+                        + İletişim Ekle
+                    </a>
+
+                    @if (Model.OgrenciIletisim?.Any() == true)
+                    {
+                        @foreach (var i in Model.OgrenciIletisim)
+                        {
+                            <div class="card mb-2 shadow-sm border-0">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+
+                                    <div>
+                                        <div><b>@i.Email</b></div>
+                                        <div class="text-muted">@i.Telefon</div>
+                                    </div>
+
+                                    <div class="d-flex gap-2">
+                                        <a class="btn btn-warning btn-modern"
+                                           asp-controller="OgrenciIletisim"
+                                           asp-action="Edit"
+                                           asp-route-id="@i.Id"
+                                           asp-route-returnUrl="@returnUrl">
+                                            Düzenle
+                                        </a>
+
+                                        <a class="btn btn-danger btn-modern"
+                                           asp-controller="OgrenciIletisim"
+                                           asp-action="Delete"
+                                           asp-route-id="@i.Id"
+                                           asp-route-returnUrl="@returnUrl">
+                                            Sil
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-muted">İletişim kaydı yok.</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- DERSLER -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#cDers">
+                    📚 Aldığı Dersler
+                </button>
+            </h2>
+
+            <div id="cDers" class="accordion-collapse collapse">
+                <div class="accordion-body">
+
+                    <a class="btn btn-success btn-modern mb-3"
+                       asp-controller="OgrenciDers"
+                       asp-action="Create"
+                       asp-route-ogrenciId="@Model.Id"
+                       asp-route-returnUrl="@returnUrl">
+                        + Ders Ata
+                    </a>
+
+                    @if (Model.OgrenciDersler?.Any() == true)
+                    {
+                        @foreach (var d in Model.OgrenciDersler)
+                        {
+                            <div class="card mb-2 shadow-sm border-0">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div>@d.DersTml?.DersAd</div>
+
+                                    <a class="btn btn-danger btn-modern"
+                                       asp-controller="OgrenciDers"
+                                       asp-action="Delete"
+                                       asp-route-id="@d.Id"
+                                       asp-route-returnUrl="@returnUrl">
+                                        Sil
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-muted">Ders kaydı yok.</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- NOTLAR -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#cNot">
+                    📝 Notlar
+                </button>
+            </h2>
+
+            <div id="cNot" class="accordion-collapse collapse">
+                <div class="accordion-body">
+
+                    <a class="btn btn-success btn-modern mb-3"
+                       asp-controller="NotTml"
+                       asp-action="Create"
+                       asp-route-ogrenciId="@Model.Id"
+                       asp-route-returnUrl="@returnUrl">
+                        + Not Ekle
+                    </a>
+
+                    @if (Model.Notlar?.Any() == true)
+                    {
+                        @foreach (var n in Model.Notlar)
+                        {
+                            <div class="card mb-2 shadow-sm border-0">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+
+                                    <div>
+                                        <div><b>@n.DersTml?.DersAd</b></div>
+                                        <div class="text-muted">@n.NotKodTml?.Tur - @n.Deger</div>
+                                    </div>
+
+                                    <div class="d-flex gap-2">
+                                        <a class="btn btn-warning btn-modern"
+                                           asp-controller="NotTml"
+                                           asp-action="Edit"
+                                           asp-route-id="@n.Id"
+                                           asp-route-returnUrl="@returnUrl">
+                                            Düzenle
+                                        </a>
+
+                                        <a class="btn btn-danger btn-modern"
+                                           asp-controller="NotTml"
+                                           asp-action="Delete"
+                                           asp-route-id="@n.Id"
+                                           asp-route-returnUrl="@returnUrl">
+                                            Sil
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-muted">Not kaydı yok.</div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

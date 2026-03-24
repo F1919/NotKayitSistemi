@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - NotKayitSistemi</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #eef1f7;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            position: fixed;
+            background: #1e1e2f;
+            padding-top: 20px;
+        }
+
+        .sidebar-title {
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar .nav-link {
+            color: #cfd8dc;
+            padding: 12px 20px;
+            margin: 6px 10px;
+            border-radius: 10px;
+        }
+
+        .sidebar .nav-link.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 30px;
+        }
+
+        .topbar {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            margin-left: 260px;
+        }
+    </style>
+</head>
+
+<body>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="sidebar-title">
+                🎓 NotKayitSistemi
+            </div>
+
+            <ul class="nav flex-column">
+
+                <li>
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                </li>
+
+                <li>
+                    <a class="nav-link" asp-controller="Ogrenci" asp-action="Index">Öğrenciler</a>
+                </li>
+
+                <li>
+                    <a class="nav-link" asp-controller="OgrenciAdres" asp-action="Index">Adresler</a>
+                </li>
+
+                <li>
+                    <a class="nav-link" asp-controller="OgrenciIletisim" asp-action="Index">İletişim</a>
+                </li>
+
+                <li>
+                    <a class="nav-link text-danger" asp-controller="Account" asp-action="Logout">Çıkış</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <div>📍 Panel</div>
+            <div>👤 @User.Identity.Name</div>
+        </div>
+    }
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        @RenderBody()
+    </div>
+
+    <!-- JS -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- 🔥 KRİTİK SATIR (HATAYI ÇÖZEN) -->
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

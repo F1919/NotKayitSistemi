@@ -1,0 +1,34 @@
+﻿@model NotKayitSistemi.Models.Entities.DersTml
+
+<h2>Yeni Ders</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <div class="mb-3">
+        <label asp-for="DersAd" class="form-label"></label>
+        <input asp-for="DersAd" class="form-control" />
+        <span asp-validation-for="DersAd" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="KrediSayisi" class="form-label"></label>
+        <input asp-for="KrediSayisi" class="form-control" />
+        <span asp-validation-for="KrediSayisi" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DersAlanKodId" class="form-label">Alan Türü</label>
+        <select asp-for="DersAlanKodId" class="form-control" asp-items="ViewBag.DersAlanKodId">
+            <option value="">-- Alan Seç --</option>
+        </select>
+        <span asp-validation-for="DersAlanKodId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary">Geri</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

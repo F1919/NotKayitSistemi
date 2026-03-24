@@ -1,0 +1,20 @@
+﻿@model NotKayitSistemi.Models.Entities.NotKodTml
+
+<h2>Not Türü Sil</h2>
+
+<div class="alert alert-danger">
+    Bu not türünü silmek istediğinize emin misiniz?
+</div>
+
+<div class="mb-3">
+    <strong>Not Türü:</strong> @Model.Tur
+</div>
+
+<form asp-action="Delete" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+
+</form>

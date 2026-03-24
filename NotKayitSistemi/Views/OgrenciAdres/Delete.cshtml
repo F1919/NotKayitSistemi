@@ -1,0 +1,17 @@
+﻿@model NotKayitSistemi.Models.Entities.OgrenciAdres
+
+<h2>Adresi Sil</h2>
+<h4>Silmek istediğinize emin misiniz?</h4>
+
+<div>
+    <strong>Öğrenci:</strong> @Model.OgrenciTml?.Ad <br />
+    <strong>Adres:</strong> @Model.Adres
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <br />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">Geri</a>
+</form>

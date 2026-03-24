@@ -1,0 +1,24 @@
+﻿@model NotKayitSistemi.Models.Entities.OgrenciDers
+
+@{
+    ViewData["Title"] = "Ders Sil";
+}
+
+<h3>Ders Sil</h3>
+
+<div class="alert alert-danger">
+    Bu kaydı silmek istediğinize emin misiniz?
+</div>
+
+<p>
+    <strong>Öğrenci:</strong> @Model.OgrenciTml.Ad @Model.OgrenciTml.Soyad <br />
+    <strong>Ders:</strong> @Model.DersTml.DersAd
+</p>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>

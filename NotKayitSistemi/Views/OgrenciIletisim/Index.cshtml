@@ -1,0 +1,37 @@
+﻿@model IEnumerable<NotKayitSistemi.Models.Entities.OgrenciIletisim>
+
+@{
+    ViewData["Title"] = "Öğrenci İletişim Listesi";
+}
+
+<h2>Öğrenci İletişim Listesi</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Yeni Kayıt</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Öğrenci</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.OgrenciTml?.Ad @item.OgrenciTml?.Soyad</td>
+                <td>@item.Email</td>
+                <td>@item.Telefon</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

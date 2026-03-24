@@ -1,0 +1,125 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Giriş Yap</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .login-box {
+            width: 380px;
+            padding: 45px 40px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            color: white;
+            text-align: center;
+        }
+
+        .login-title {
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            height: 48px;
+            border: none;
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+            .form-control::placeholder {
+                color: rgba(255,255,255,0.7);
+            }
+
+            .form-control:focus {
+                box-shadow: none;
+                background: rgba(255,255,255,0.25);
+            }
+
+        .btn-login {
+            width: 100%;
+            height: 48px;
+            border-radius: 12px;
+            background: white;
+            color: #333;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+            .btn-login:hover {
+                background: #f1f1f1;
+                transform: translateY(-2px);
+            }
+
+        .logo {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #ffb3b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <div class="logo">🎓</div>
+
+        <div class="login-title">Not Kayıt Sistemi</div>
+        <div class="login-subtitle">Hesabınıza giriş yapın</div>
+
+        <form method="post">
+
+            <div class="mb-3">
+                <input type="text" name="username" class="form-control" placeholder="Kullanıcı adı" required />
+            </div>
+
+            <div class="mb-3">
+                <input type="password" name="password" class="form-control" placeholder="Şifre" required />
+            </div>
+
+            <button type="submit" class="btn btn-login">
+                Giriş Yap
+            </button>
+
+        </form>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="error">@ViewBag.Error</div>
+        }
+
+    </div>
+
+</body>
+</html>

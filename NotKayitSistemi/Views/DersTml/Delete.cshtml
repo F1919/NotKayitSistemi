@@ -1,0 +1,19 @@
+﻿@model NotKayitSistemi.Models.Entities.DersTml
+
+<h2>Ders Sil</h2>
+
+<div class="alert alert-danger">
+    Bu dersi silmek istediğinize emin misiniz?
+</div>
+
+<p>
+    <strong>Ders Adı:</strong> @Model.DersAd <br />
+    <strong>Kredi:</strong> @Model.KrediSayisi <br />
+    <strong>Alan Türü:</strong> @Model.DersAlanKodTml?.Tur
+</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>

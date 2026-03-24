@@ -1,0 +1,30 @@
+﻿@model NotKayitSistemi.Models.Entities.DersTml
+
+<h2>Ders Güncelle</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="DersAd"></label>
+        <input asp-for="DersAd" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="KrediSayisi"></label>
+        <input asp-for="KrediSayisi" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DersAlanKodId">Alan Türü</label>
+        <select asp-for="DersAlanKodId"
+                class="form-control"
+                asp-items="ViewBag.DersAlanKodId">
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-warning">Güncelle</button>
+    <a asp-action="Index" class="btn btn-secondary">Geri</a>
+
+</form>

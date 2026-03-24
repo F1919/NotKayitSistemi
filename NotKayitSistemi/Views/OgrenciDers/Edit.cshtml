@@ -1,0 +1,37 @@
+﻿@model NotKayitSistemi.Models.Entities.OgrenciDers
+
+@{
+    ViewData["Title"] = "Ders Güncelle";
+}
+
+<h3>Ders Güncelle</h3>
+
+<form asp-action="Edit" method="post">
+
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="OgrenciTmlId" class="control-label">Öğrenci</label>
+        <select asp-for="OgrenciTmlId"
+                class="form-control"
+                asp-items="ViewBag.OgrenciTmlId">
+        </select>
+        <span asp-validation-for="OgrenciTmlId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-3">
+        <label asp-for="DersId" class="control-label">Ders</label>
+        <select asp-for="DersId"
+                class="form-control"
+                asp-items="ViewBag.DersId">
+        </select>
+        <span asp-validation-for="DersId" class="text-danger"></span>
+    </div>
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-warning">Güncelle</button>
+        <a asp-action="Index" class="btn btn-secondary">Geri</a>
+    </div>
+
+</form>

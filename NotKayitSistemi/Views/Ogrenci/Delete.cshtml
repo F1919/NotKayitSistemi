@@ -1,0 +1,24 @@
+﻿@model NotKayitSistemi.Models.Entities.OgrenciTml
+
+<h3>Öğrenci Sil</h3>
+
+<div class="alert alert-danger">
+    Bu öğrenciyi silmek istediğinize emin misiniz?
+</div>
+
+<p>
+    <b>Ad:</b> @Model.Ad <br />
+    <b>Soyad:</b> @Model.Soyad
+</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Sil
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        İptal
+    </a>
+</form>
